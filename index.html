@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mallzprodukpanel — Store</title>
+  <meta name="theme-color" content="#7b49ff" />
+  <style>
+    :root{
+      --bg:#0b0b10;
+      --card:#14141c;
+      --muted:#9aa0a6;
+      --text:#eef1f7;
+      --brand1:#7b49ff;
+      --brand2:#ff3ea1;
+      --radius:20px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,Segoe UI,Roboto,Inter,Arial}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:980px;margin:auto;padding:24px}
+    .hero{
+      border-radius:28px;
+      padding:42px 24px 36px;
+      background: linear-gradient(135deg, var(--brand1), var(--brand2));
+      box-shadow:0 20px 50px rgba(0,0,0,.35);
+      text-align:center;
+    }
+    .logo{
+      width:94px;height:94px;margin:0 auto 14px;
+      border-radius:999px;display:grid;place-items:center;
+      background:#0009;color:#fff;font-weight:800;font-size:28px;
+    }
+    .hero h1{margin:0;font-size:32px}
+    .hero p{margin:8px 0 0;font-size:14px}
+    .grid{display:grid;gap:18px;margin-top:22px}
+    .card{
+      background:#14141c;border-radius:var(--radius);
+      padding:18px 16px;box-shadow:0 12px 30px rgba(0,0,0,.35);
+    }
+    .pill{
+      font-size:12px;background:#2a2a40;color:#cfd3ff;
+      padding:6px 10px;border-radius:999px;display:inline-block
+    }
+    .items{display:grid;gap:10px;margin-top:10px}
+    .item{
+      display:flex;flex-direction:column;gap:6px;
+      background:#0f0f17;border-radius:16px;
+      padding:12px 12px
+    }
+    .name{font-weight:600}
+    .price{opacity:.9}
+    .btn{
+      display:inline-block;text-align:center;
+      border:none;background:linear-gradient(135deg,#6c52ff,#ff4db6);
+      padding:10px 14px;border-radius:12px;font-weight:700;cursor:pointer;
+      color:#fff;margin-top:6px
+    }
+    .benefit li{margin:6px 0;color:#c5c8d4}
+    footer{opacity:.6;text-align:center;margin:26px 0 8px;font-size:12px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      <div class="logo">MZ</div>
+      <h1>Mallzprodukpanel — Store</h1>
+      <p>🌌✨◈━━━[ MALLZ OFFICIAL ]━━━◈✨🌌<br>💠 Solusi Lengkap Script Bot & Panel Premium 💠</p>
+    </header>
+
+    <section class="grid">
+      <div class="card">
+        <span class="pill">🌐 PANEL PTERODACTYL</span>
+        <div class="items" id="panelList"></div>
+      </div>
+
+      <div class="card">
+        <span class="pill">📦 PRODUK TAMBAHAN</span>
+        <div class="items" id="addonList"></div>
+      </div>
+
+      <div class="card">
+        <span class="pill">✅ Benefit Panel</span>
+        <ul class="benefit">
+          <li>Spek VPS r16 c4</li>
+          <li>Performa ngebut</li>
+          <li>Bot nyala 24 jam</li>
+          <li>Dan lain-lain (no yapping 😄)</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer>© <span id="year"></span> Mallzprodukpanel • All rights reserved.</footer>
+  </div>
+
+  <script>
+    const STORE_NAME = "Mallzprodukpanel";
+    const WA_NUMBER_INTL = "6285800766842"; 
+
+    const panels = [
+      { name: "RAM 5GB", price: "4K" },
+      { name: "RAM 6GB", price: "5K" },
+      { name: "RAM 7GB", price: "6K" },
+      { name: "RAM 8GB", price: "7K" },
+      { name: "RAM 9GB", price: "8K" },
+      { name: "RAM 10GB", price: "9K" },
+      { name: "RAM Unlimited", price: "10K" },
+    ];
+    const addons = [
+      { name: "Reseller Panel", price: "10K" },
+      { name: "Admin Panel", price: "15K" },
+      { name: "Owner Panel", price: "20K" },
+      { name: "Partner Panel", price: "30K" },
+      { name: "Tangan Kanan Panel", price: "40K" },
+    ];
+
+    function buildMessage(product){
+      return encodeURIComponent(`Halo Admin ${STORE_NAME}!\nSaya ingin beli: ${product.name}\nHarga: ${product.price}`);
+    }
+    function renderList(containerId, items){
+      const box = document.getElementById(containerId);
+      items.forEach(item=>{
+        const row = document.createElement('div');
+        row.className = 'item';
+        row.innerHTML = `
+          <div class="name">${item.name}</div>
+          <div class="price">Harga: ${item.price}</div>
+          <a class="btn" target="_blank" href="https://wa.me/${WA_NUMBER_INTL}?text=${buildMessage(item)}">Beli via WhatsApp</a>
+        `;
+        box.appendChild(row);
+      });
+    }
+    renderList('panelList', panels);
+    renderList('addonList', addons);
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
